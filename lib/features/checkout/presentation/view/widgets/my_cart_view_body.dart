@@ -1,6 +1,6 @@
 import 'package:checkout_app/core/widgets/custom_button.dart';
-import 'package:checkout_app/features/checkout/presentation/view/payment_details_view.dart';
-import 'package:checkout_app/features/checkout/presentation/view/widgets/cart_info_item.dart';
+ import 'package:checkout_app/features/checkout/presentation/view/widgets/cart_info_item.dart';
+import 'package:checkout_app/features/checkout/presentation/view/widgets/payment_method_list_view.dart';
 import 'package:checkout_app/features/checkout/presentation/view/widgets/total_price_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -59,8 +59,12 @@ class MyCartViewBody extends StatelessWidget {
           ),
           CustomButton(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const PaymentDetailsView()));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) => const PaymentDetailsView()));
+              showModalBottomSheet(
+                context: context,
+                builder: (context) => const PaymentMethodBottomSheet(),
+              );
             },
             title: 'Complete Payment',
             borderRadius: BorderRadius.circular(14),
@@ -68,6 +72,31 @@ class MyCartViewBody extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaymentMethodBottomSheet extends StatelessWidget {
+  const PaymentMethodBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          const PaymentMethodListView(),
+          const SizedBox(
+            height: 16,
+          ),
+          CustomButton(
+              title: 'Continue', borderRadius: BorderRadius.circular(15)),
         ],
       ),
     );

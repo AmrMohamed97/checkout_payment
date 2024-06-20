@@ -1,5 +1,9 @@
 import 'package:checkout_app/core/utiles/styles.dart';
-import 'package:flutter/material.dart';
+import 'package:checkout_app/features/checkout/presentation/view/widgets/card_info_widget.dart';
+import 'package:checkout_app/features/checkout/presentation/view/widgets/payment_item_info.dart';
+import 'package:checkout_app/features/checkout/presentation/view/widgets/total_price_widget.dart';
+ import 'package:flutter/material.dart';
+ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ThankYouCard extends StatelessWidget {
   const ThankYouCard({
@@ -52,34 +56,52 @@ class ThankYouCard extends StatelessWidget {
               title: 'To',
               value: 'Sam Louis',
             ),
+            const Divider(
+              thickness: 2,
+              height: 60,
+              color: Color(0xffC7C7C7),
+            ),
+            const TotalPriceWidget(title: 'Total', value: r'$50.97'),
+            const SizedBox(
+              height: 30,
+            ),
+            const CardInfoWidget(),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Icon(
+                  FontAwesomeIcons.barcode,
+                  size: 64,
+                ),
+                Container(
+                  width: 113,
+                  height: 58,
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        side: const BorderSide(
+                          color: Color(0xff34A853),
+                          width: 2,
+                        )),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'PAID',
+                      style: Styles.style25.copyWith(
+                        color: const Color(0xff34A853),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: (MediaQuery.sizeOf(context).height * .2 + 20) / 2 - 30,
+            ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class PaymentItemInfo extends StatelessWidget {
-  const PaymentItemInfo({
-    super.key,
-    required this.title,
-    required this.value,
-  });
-  final String title, value;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: Styles.styleRegular18,
-        ),
-        Text(
-          value,
-          style: Styles.stylesemiBold18,
-        ),
-      ],
     );
   }
 }

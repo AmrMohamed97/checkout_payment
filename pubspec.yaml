@@ -33,6 +33,8 @@ dependencies:
     sdk: flutter
   flutter_credit_card: ^4.0.1
   flutter_svg: ^2.0.10+1
+  font_awesome_flutter: ^10.7.0
+  font_awesome_icon_class: ^0.0.6
 
 dev_dependencies:
   flutter_lints: ^3.0.0
