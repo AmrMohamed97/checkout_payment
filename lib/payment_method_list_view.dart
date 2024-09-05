@@ -14,7 +14,7 @@ class _PaymentMethodListViewState extends State<PaymentMethodListView> {
   final List paymentList = [
     'assets/images/card.svg',
     'assets/images/payPal.svg',
-    'assets/images/applePay.svg',
+    // 'assets/images/applePay.svg',
   ];
   int selectedIndex = 0;
   @override
