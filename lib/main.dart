@@ -1,4 +1,4 @@
-import 'package:checkout_app/my_cart_view.dart';
+import 'package:checkout_app/checkout/presentation/view/my_cart_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,3 +16,7 @@ class CheckoutPayment extends StatelessWidget {
     );
   }
 }
+
+//  PaymentIntentObject createPaymentIntent(amount,currency){}
+//  initPaymentSheet(paymentIntentClientSecret){}
+//  presentPaymentSheet()
