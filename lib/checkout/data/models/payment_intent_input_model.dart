@@ -1,6 +1,6 @@
 class PaymentIntentInputModel {
   final String currency;
-  final int amount;
+  final num amount;
 
   PaymentIntentInputModel({required this.currency, required this.amount});
   toJson() {

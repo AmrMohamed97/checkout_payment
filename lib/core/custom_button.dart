@@ -2,18 +2,22 @@ import 'package:checkout_app/core/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key,
-      required this.title,
-      this.width,
-      this.height,
-      required this.borderRadius,
-      this.color, this.onTap});
+  const CustomButton({
+    super.key,
+    required this.title,
+    this.width,
+    this.height,
+    required this.borderRadius,
+    this.color,
+    this.onTap,
+    this.isLoading = false,
+  });
   final String title;
   final double? width, height;
   final BorderRadiusGeometry borderRadius;
   final Color? color;
   final void Function()? onTap;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,10 +32,15 @@ class CustomButton extends StatelessWidget {
           color: color ?? const Color(0xff34A853),
         ),
         child: Center(
-          child: Text(
-            title,
-            style: Styles.style22,
-          ),
+          child: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: Colors.white,
+                ))
+              : Text(
+                  title,
+                  style: Styles.style22,
+                ),
         ),
       ),
     );

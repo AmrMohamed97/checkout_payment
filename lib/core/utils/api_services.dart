@@ -7,7 +7,7 @@ class ApiServices {
       url,
       data: body,
       options: Options(
-        contentType: "application/x-www-form-urlencoded",
+        contentType: Headers.formUrlEncodedContentType,
         headers: {
           'Authorization': "Bearer $token",
         }

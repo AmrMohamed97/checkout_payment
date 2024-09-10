@@ -2,32 +2,27 @@ import 'dart:developer';
 
 import 'package:checkout_app/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_app/checkout/data/repo/checkout_repo.dart';
-import 'package:checkout_app/checkout/data/repo_impl/checkout_repo_impl.dart';
 import 'package:checkout_app/checkout/presentation/manager/checkout_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutCubit extends Cubit<CheckoutState> {
   CheckoutCubit(this.checkoutRepo) : super(CheckoutInitial());
-  final CheckoutRepo checkoutRepo ;
-  Future<void> checkoutSuccess() async {
+  final CheckoutRepo checkoutRepo;
+  Future<void> makePayment(
+      {required PaymentIntentInputModel paymentIntentInput}) async {
     emit(CheckoutLoading());
-    var data =await checkoutRepo.makePayment(
-        paymentIntentInput: PaymentIntentInputModel(
-      amount: 100,
-      currency: 'usd',
-    ));
+    var data = await checkoutRepo.makePayment(
+      paymentIntentInput: paymentIntentInput,
+    );
     data.fold(
       (failure) {
+        log('===========error==================');
+        log(failure.message);
         emit(CheckoutError(message: failure.message));
       },
-       (value) {
-         emit(CheckoutSuccess());
-       },
-       );
-  }
-  @override
-  void onChange(Change<CheckoutState> change) {
-    log(onChange.toString());
-    super.onChange(change);
+      (value) {
+        emit(CheckoutSuccess());
+      },
+    );
   }
 }
