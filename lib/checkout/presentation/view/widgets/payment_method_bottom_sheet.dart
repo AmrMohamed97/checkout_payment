@@ -46,9 +46,20 @@ class PaymentMethodBottomSheet extends StatelessWidget {
             builder: (context, state) {
               return CustomButton(
                 isLoading: state is CheckoutLoading,
-                onTap: () {
+                onTap: () async {
+                  // await BlocProvider.of<CheckoutCubit>(context)
+                  //     .createCustomer(name: 'Amr');
+                  String customerId = "cus_QpUsrEuZKIGevC";
+                  // BlocProvider.of<CheckoutCubit>(context).customerId!;
+                  print(customerId);
+                  await BlocProvider.of<CheckoutCubit>(context)
+                      .createEphemeralKey(customerId: customerId);
+                  String ephemeralKey =
+                      BlocProvider.of<CheckoutCubit>(context).ephemeralKey!;
                   PaymentIntentInputModel paymentIntentInput =
                       PaymentIntentInputModel(
+                    ephemeralKey: ephemeralKey,
+                    customer: customerId,
                     amount: 100 * 100,
                     currency: 'usd',
                   );

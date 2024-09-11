@@ -5,4 +5,10 @@ class Keys {
       "sk_test_51PvqsUHIpPyEiKw9pvlFUxZtCQAOOTpZdPWtiROU0QSkHvFpNc2MuZgoyeWKxR9QV8cWymNhmBkPzItCBqb2R2dL00HoBYlMqT";
   static const String lCreatePaymentIntent =
       "https://api.stripe.com/v1/payment_intents";
+
+  static const String lCreateCustomerUrl =
+      "https://api.stripe.com/v1/customers";
+
+  static const String lCreateEphemeralKey =
+      "https://api.stripe.com/v1/ephemeral_keys";
 }

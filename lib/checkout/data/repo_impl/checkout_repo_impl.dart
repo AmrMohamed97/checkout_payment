@@ -1,3 +1,5 @@
+import 'package:checkout_app/checkout/data/models/customer_model/customer_model.dart';
+import 'package:checkout_app/checkout/data/models/ephemeral_key_model/ephemeral_key_model.dart';
 import 'package:checkout_app/checkout/data/models/payment_intent_input_model.dart';
 import 'package:checkout_app/checkout/data/repo/checkout_repo.dart';
 import 'package:checkout_app/core/error/failure.dart';
@@ -16,6 +18,40 @@ class CheckoutRepoImpl extends CheckoutRepo {
       );
       return right(null);
     } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CustomerModel>> createCustomer(
+      {required String name}) async {
+    try {
+      CustomerModel customerModel =
+          await stripeService.createCustomer(name: name);
+      print('home repo id');
+      print(customerModel.id);
+      return right(customerModel);
+    } catch (error) {
+      if (error is DioException) {
+        return left(ServerFailure.fromDioError(error));
+      }
+      return left(ServerFailure(error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, EphemeralKeyModel>> createEphemeralKey(
+      {required String customerId}) async {
+    try {
+      EphemeralKeyModel ephemeralKeyModel =
+          await stripeService.createEphemeralKey(customerId: customerId);
+      return right(ephemeralKeyModel);
+    } catch (error) {
+      print('==================error=====================');
+      print(error.toString());
       if (error is DioException) {
         return left(ServerFailure.fromDioError(error));
       }
